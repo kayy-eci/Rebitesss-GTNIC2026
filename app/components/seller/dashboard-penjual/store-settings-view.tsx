@@ -546,25 +546,25 @@ export function StoreSettingsView() {
             }} noValidate>
           
           <Section icon={Store} title="Identitas toko" description="Nama dan foto yang pertama kali dilihat pembeli.">
-            <div className="flex flex-wrap items-center gap-4 rounded-xl border border-border/70 bg-secondary/40 p-3">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white">
-                {logoPreview || values.imageUrl ? (<img src={logoPreview ?? values.imageUrl} alt="Logo toko saat ini" decoding="async" loading="lazy" className="h-full w-full object-cover"/>) : (<ImageIcon aria-hidden className="h-6 w-6 text-muted-foreground/40"/>)}
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/70 bg-secondary/40 px-3.5 py-3">
+              <div className="flex min-w-0 items-start gap-2.5">
+                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-primary shadow-sm">
+                  <ImageIcon aria-hidden className="h-4 w-4"/>
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-charcoal-900">Foto toko</p>
+                  <p className="mt-0.5 text-[11px] leading-relaxed text-sage-500">
+                    Tampil di pratinjau dan halaman toko. PNG/JPG maks. 2MB, sebaiknya persegi.
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-charcoal-900">
-                  {values.storeName || "Nama toko"}
-                </p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-sage-500">
-                  PNG atau JPG, maksimal 2MB. Foto persegi paling rapi.
-                </p>
-                {editing ? (<button type="button" onClick={() => logoInputRef.current?.click()} disabled={saving} className="mt-2 inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-border bg-white px-3 text-xs font-semibold text-primary transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:cursor-not-allowed disabled:opacity-50">
-                    <ImagePlus aria-hidden className="h-3.5 w-3.5"/>
-                    {logoPreview || values.imageUrl ? "Ganti foto" : "Unggah foto"}
-                  </button>) : (<p className="mt-1 text-[11px] font-medium text-muted-foreground">
-                    Klik “Edit profil” untuk mengganti foto.
-                  </p>)}
-                <input ref={logoInputRef} type="file" accept="image/png,image/jpeg,image/jpg" className="hidden" onChange={handleLogoChange}/>
-              </div>
+              {editing ? (<button type="button" onClick={() => logoInputRef.current?.click()} disabled={saving} className="inline-flex min-h-[36px] shrink-0 items-center gap-1.5 rounded-lg border border-border bg-white px-3 text-xs font-semibold text-primary transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:cursor-not-allowed disabled:opacity-50">
+                  <ImagePlus aria-hidden className="h-3.5 w-3.5"/>
+                  {logoPreview || values.imageUrl ? "Ganti foto" : "Unggah foto"}
+                </button>) : (<p className="shrink-0 text-[11px] font-medium text-muted-foreground">
+                  Klik “Edit profil” untuk mengganti.
+                </p>)}
+              <input ref={logoInputRef} type="file" accept="image/png,image/jpeg,image/jpg" className="hidden" onChange={handleLogoChange}/>
             </div>
 
             <Field id="settings-store-name" label="Nama toko" hint="Nama yang tampil di katalog, keranjang, dan struk pesanan." error={fieldErrors.storeName}>
